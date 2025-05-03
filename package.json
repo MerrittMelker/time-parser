@@ -1,0 +1,13 @@
+{
+  "name": "time-parser",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "pegjs -o src/timeParser.js grammar/timeParser.pegjs",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "pegjs": "^0.10.0"
+  }
+}
