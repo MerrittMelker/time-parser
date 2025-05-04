@@ -1,28 +1,21 @@
-Start
-  = Time
+time
+  = h:hour offset:ampm { return h + offset }
+  / h:hour ":" m:minute offset:ampm { return h + m + offset }
 
-Time
-  = TwelveHourTime / TwentyFourHourTime
+ampm
+  = "am" { return 0 }
+  / "pm" { return 12*60 }
 
-TwelveHourTime
-  = Hour12 Minutes? Meridiem
+hour
+  = h:two_hour_digits { return h*60 }
+  / h:digit { return h*60 }
 
-TwentyFourHourTime
-  = Hour24 Minutes
+minute
+  = d1:[0-5] d2:[0-9] { return parseInt(d1+d2, 10); }
 
-Minutes
-  = ":" MinuteDigit MinuteDigit
+digit
+  = digit:[0-9] { return parseInt(digit, 10); }
 
-Meridiem
-  = "am" / "pm"
-
-Hour12
-  = "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" / "10" / "11" / "12"
-
-Hour24
-  = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9"
-  / "10" / "11" / "12" / "13" / "14" / "15" / "16" / "17"
-  / "18" / "19" / "20" / "21" / "22" / "23"
-
-MinuteDigit
-  = [0-9]
+two_hour_digits
+  = d1:[01] d2:[0-9] { return parseInt(d1+d2, 10); }
+  / d1:[2] d2:[0-3] { return parseInt(d1+d2, 10); }
